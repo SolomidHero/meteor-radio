@@ -1,0 +1,29 @@
+<head>
+  <title></title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic" rel="stylesheet">
+</head>
+
+<body>
+  
+  {{> player}}
+
+</body>
+
+<template name="title">
+  <h1>{{title}}</h1>
+</template>
+
+<template name="player">
+  <div class="radio-block">
+    {{> title}}
+    <!-- {{track.artist}}   -->{{track.title}}
+    <audio id="audioElem" src="{{track.url}}" autoplay="1"></audio>
+    <div class="buttons-block">
+      <button id="playPauseBtn">Play / Pause</button>
+      <button id="nextBtn">Next</button>
+    </div>
+    <div>
+      <input style="display: none" id="slider" type="range" min="0" max="{{duration}}" value="{{currentTime}}">
+    </div>
+  </div>
+</template>
