@@ -9,6 +9,7 @@ reactiveId = new ReactiveVar 1
 
 reactiveCurrentTime = new ReactiveVar 0
 reactiveDuration = new ReactiveVar 0
+reactivePaused = new ReactiveVar false
 
 updateSlider = new ReactiveVar true
 
@@ -28,6 +29,12 @@ seekTo = (time) ->
   elem = document.querySelector '#audioElem'
   elem.currentTime = time
 
+updatePaused = ->
+  elem = document.querySelector '#audioElem'
+  unless elem
+    return false
+  reactivePaused.set elem.paused
+
 initListeners = ->
   elem = document.querySelector '#audioElem'
   elem.addEventListener 'ended', ->
@@ -39,6 +46,13 @@ initListeners = ->
 
   elem.addEventListener 'timeupdate', ->
     reactiveCurrentTime.set elem.currentTime
+
+  elem.addEventListener 'play', -> 
+    do updatePaused
+  elem.addEventListener 'pause', -> 
+    do updatePaused
+  elem.addEventListener 'ended', -> 
+    do updatePaused
 
 Template.title.onRendered ->
   do setRandomTrackId
@@ -89,6 +103,9 @@ Template.player.helpers
       reactiveCurrentTime.get()
     else
       $('#slider').val()
+
+  isPaused: -> 
+    do reactivePaused.get
 
 
 

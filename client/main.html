@@ -19,8 +19,15 @@
     <!-- {{track.artist}}   -->{{track.title}}
     <audio id="audioElem" src="{{track.url}}" autoplay="1"></audio>
     <div class="buttons-block">
-      <button id="playPauseBtn">Play / Pause</button>
-      <button id="nextBtn">Next</button>
+      <button id="playPauseBtn">
+        {{#if isPaused}}
+          <i class="fa fa-play" aria-hidden="true"></i>
+        {{else}}
+          <i class="fa fa-pause" aria-hidden="true"></i>
+        {{/if}}
+
+      </button>
+      <button id="nextBtn"><i class="fa fa-forward" aria-hidden="true"></i></button>
     </div>
     <div>
       <input style="display: none" id="slider" type="range" min="0" max="{{duration}}" value="{{currentTime}}">

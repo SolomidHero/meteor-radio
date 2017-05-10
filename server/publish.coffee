@@ -16,7 +16,7 @@ global.addTrack = (options) ->
 Meteor.startup ->
 
   unless Tracks.find().count() > 0
-    files = fs.readdirSync '/Users/max2/projects/sandbox/meteor-radio/public/tracks'
+    files = fs.readdirSync 'C:/Users/Dmitriy/projects/meteor-radio/public/tracks'
     files.forEach (file) ->
       if file[0] == '.' or file.indexOf('.mp3') < 0
         return
